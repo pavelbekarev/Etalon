@@ -1,0 +1,79 @@
+.Basket {
+  transition: 0.8s ease-in-out;
+  position: fixed;
+}
+
+.Basket.unactive {
+  transform: translateX(1000px);
+  z-index: 100;
+  background-color: aliceblue;
+  padding-top: 35px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-bottom: 70px;
+  border-radius: 35px 0px 0px 35px;
+  right: 0;
+  top: 0;
+}
+
+.Basket.active {
+  position: fixed;
+  background-color: aliceblue;
+  padding-top: 35px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-bottom: 70px;
+  border-radius: 35px 0px 0px 35px;
+  z-index: 100;
+  right: 0;
+  top: 0;
+}
+
+.Basket_close {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  margin-bottom: 35px;
+}
+
+.Basket_close img {
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+.Basket_txt {
+  padding-top: 20px;
+  max-width: 533px;
+  font-size: 20px;
+  padding-bottom: 50px;
+  font-weight: normal;
+}
+
+.Basket_elements {
+  display: flex;
+  flex-direction: column;
+}
+.Basket_elements button {
+  width: 256px;
+  height: 69px;
+  align-self: center;
+  border: none;
+  background-color: #2d2d2d;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 20px;
+  margin-top: 50px;
+}
+
+.basket_background_active {
+  left: 0;
+  height: 4000px;
+  width: 4000px;
+  background-color: rgba(255, 255, 255, 0.349);
+  position: fixed;
+  z-index: 99;
+  margin-top: -200px;
+
+  backdrop-filter: blur(2px);
+}

@@ -1,0 +1,28 @@
+.main_container{
+    height: 644px;
+    border-radius: 45px;
+    margin-left: 323px;
+    background-color: #E9EAEB;
+    width: 100%;
+    max-width: 1273px;
+}
+
+.lTitle{
+   
+    font-size: 40px;
+    font-weight: 600;
+    margin-left: 323px;
+    margin-bottom: 30px;
+    padding-top: 80px;
+}
+
+.location_container{
+    height: 644px;
+    border-radius: 45px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 30px;
+    padding-bottom: 70px;
+    
+}
