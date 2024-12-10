@@ -3,3 +3,9 @@ export interface IHeader{
     txtChild: string;
     txtChildAdditional: string;
 }
+
+export interface iCard{
+    name: string
+    price: string
+    article: string
+}

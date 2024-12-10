@@ -10,6 +10,7 @@ import image1 from "../image1.png"
 import image2 from "../Image2.png"
 import Search from "../Search.svg"
 import BasketI from "../Basket.svg"
+import Basket2 from "../Basket.svg"
 import CloseIcon from "../CloseIcon.png"
 import IntroBlockBg from "../IntroBlockBg.png"
 import tg from"../tg.png"
@@ -19,6 +20,16 @@ import vk from "../vk.png"
 import phone from "../phone.png"
 import map from "../map.png"
 import Mail from "../Mail.png"
+import Union from "../Union.svg"
+import Ach1 from "../Ach1.png"
+import Ach2 from "../Ach2.png"
+import Ach3 from "../Ach3.png"
+import Filter_Arrow from "../Chevron_Right.png"
+import ArrowBack from "../Chevron_Left.png"
+import ArrowUp from "../Chevron_Up.png"
+import SocksBanner from "../SocksBanner.png"
+import CardBasket from "../Card_basket.png"
+import SockImg from "../sock.png"
 
 export {
     
@@ -42,6 +53,17 @@ export {
     tg,
     Mail,
     phone,
-    map
+    map,
+    Basket2,
+    Union,
+    Ach1,
+    Ach2,
+    Ach3,
+    Filter_Arrow,
+    ArrowBack,
+    ArrowUp,
+    SocksBanner,
+    CardBasket,
+    SockImg
 
 }

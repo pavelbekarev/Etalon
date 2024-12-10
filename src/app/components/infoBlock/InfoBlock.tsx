@@ -3,7 +3,7 @@ import "./InfoBlock.scss"
 
 interface InfoT {
     
-    InfoBlock: string;
+    InfoBlock?: string;
     InfoTxtBlock: string;
     
 }

@@ -1,12 +1,10 @@
 import React from "react";
-import {
-  Logo,
-  Search,
-  User,
-} from "@/app/imgs/imgIndex/imgIndex";
+import { Logo, Search } from "@/app/imgs/imgIndex/imgIndex";
 import Image from "next/image";
 import { IHeader } from "@/app/types/interface";
 import Basket from "@/app/components/basket/Basket";
+import Registration from "@/app/components/registration/Registration";
+import Link from "next/link";
 import "./IntroBlock.scss";
 
 const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
@@ -18,18 +16,21 @@ const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
     <div className="HeaderBlock">
       <div className="HeaderBlock_container">
         <div className="HeaderBlock_header">
-          <div className="HeaderBlock_header_logo">
-            <Image src={Logo} alt="" />
-          </div>
+          <Link href="/mainPage">
+            <div className="HeaderBlock_header_logo">
+              <Image src={Logo} alt="" />
+            </div>
+          </Link>
           <div className="HeaderBlock_header_navigation">
-            
-          <div className="HeaderBlock_header_navigation_catalogue">
-              <div className="HeaderBlock_header_navigation_catalogue_txt">
-                Каталог
-              </div>
+            <div className="HeaderBlock_header_navigation_catalogue">
+              <Link href="/cataloguePage">
+                <div className="HeaderBlock_header_navigation_catalogue_txt">
+                  <p>Каталог</p>
+                </div>
+              </Link>
             </div>
             <div className="HeaderBlock_header_navigation_img">
-              <Image src={User} alt=""></Image>
+              <Registration></Registration>
             </div>
 
             <div className="HeaderBlock_header_navigation_img">

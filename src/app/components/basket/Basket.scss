@@ -60,7 +60,7 @@
   border: none;
   background-color: #2d2d2d;
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 24px;
   border-radius: 20px;
   margin-top: 50px;
@@ -74,6 +74,10 @@
   position: fixed;
   z-index: 99;
   margin-top: -200px;
-
   backdrop-filter: blur(2px);
+}
+
+.Basket_Title{
+   font-size: 36px;
+   font-weight: 600;
 }
