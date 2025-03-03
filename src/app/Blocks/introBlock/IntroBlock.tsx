@@ -30,14 +30,14 @@ const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
               </Link>
             </div>
             <div className="HeaderBlock_header_navigation_img">
-              <Registration></Registration>
+              <Registration />
             </div>
 
             <div className="HeaderBlock_header_navigation_img">
-              <Basket></Basket>
+              <Basket />
             </div>
             <div className="HeaderBlock_header_navigation_img">
-              <Image src={Search} alt=""></Image>
+              <Image src={Search} alt="" />
             </div>
           </div>
         </div>

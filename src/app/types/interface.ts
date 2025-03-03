@@ -1,11 +1,12 @@
-export interface IHeader{
-    imgChild: any;
-    txtChild: string;
-    txtChildAdditional: string;
+export interface IHeader {
+  imgChild: any;
+  txtChild: string;
+  txtChildAdditional: string;
 }
 
-export interface iCard{
-    name: string
-    price: string
-    article: string
+export interface iCard {
+  id: number;
+  name: string;
+  price: string;
+  article: string;
 }
