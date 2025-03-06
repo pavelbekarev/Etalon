@@ -4,6 +4,10 @@ import "../components/ModalWindow/style.scss";
 import { ModalWindow } from "../components/ModalWindow";
 import React from "react";
 
+/**
+ * Класс для создания универсальных модальных окон с отображением компонента.
+ * TODO: не доделан.
+ */
 export class ModalManager {
   /**
    * Информация для отображения в модальном окне
@@ -11,6 +15,8 @@ export class ModalManager {
   infoForModal: any;
 
   componentForRender: React.ElementType;
+
+  static instance: ModalManager;
 
   selectors = {
     cartButton: "[data-js-cart-button]",
@@ -26,9 +32,20 @@ export class ModalManager {
   }: {
     componentForRender: React.ElementType;
   }) {
+    if (ModalManager.instance) {
+      return ModalManager.instance;
+    }
+
     this.componentForRender = componentForRender;
 
     this.bindEvents();
+  }
+
+  static getInstance() {
+    if (!ModalManager.instance) {
+      ModalManager.instance = new ModalManager(com);
+    }
+    return ModalManager.instance;
   }
 
   private createModalWindowInstance() {
@@ -64,8 +81,9 @@ export class ModalManager {
     if (modalInstance) modalInstance.remove();
   }
 
-  private bindEvents() {
+  bindEvents() {
     const root = document.querySelector("#root");
+    console.log("фыфвфывфывфывфывфыв");
 
     /**
      * При клике на кнопку с атрибутом "data-js-cart-button"
