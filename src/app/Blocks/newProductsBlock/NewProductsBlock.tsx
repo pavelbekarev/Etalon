@@ -1,17 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import "./NewProductsBlock.scss";
-import Swiper from "swiper";
-import { Autoplay, Navigation } from "swiper/modules";
-import { SwiperSlide } from "swiper/react";
 import Card from "@/app/components/Card/Card";
-import { s, style, tr } from "framer-motion/client";
 import { ArrowBack, ArrowUp, Filter_Arrow } from "@/app/imgs/imgIndex/imgIndex";
 import Image from "next/image";
 import { cardsInfo } from "./constants";
-import { ModalManager } from "@/app/plugins/modalManager";
-import { ModalWindow } from "@/app/components/ModalWindow";
-import { ConfirmModal } from "@/app/components/ConfirmModal";
+import { ConfirmModalWindow } from "@/app/components/ConfirmModal";
+import { ConfirmModalManager } from "@/app/plugins/confirmModalManager";
 
 const NewProductsBlock = () => {
   const [mode, setMode] = useState<string>("all");
@@ -21,7 +16,7 @@ const NewProductsBlock = () => {
   const [filtersOpen, setIsFiltersOpen] = useState(false);
 
   useEffect(() => {
-    new ModalManager({ componentForRender: ConfirmModal });
+    new ConfirmModalManager(ConfirmModalWindow);
   }, []);
 
   const ChooseColor = () => {
@@ -37,7 +32,7 @@ const NewProductsBlock = () => {
   };
 
   return (
-    <div className="NewProductsBlock">
+    <div className="NewProductsBlock" id="NewProductsBlock">
       <div className="NewProductsBlock_header">
         <div className="NewProductsBlock_header_left">
           <div

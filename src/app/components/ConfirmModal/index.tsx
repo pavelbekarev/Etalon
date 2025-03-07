@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import "./style.scss";
-import { ConfirmModalWindowModel } from "./model";
+import { ModalManager } from "@/app/plugins/modalManager--old";
+import { ModalWindow } from "../ModalWindow";
+import { ConfirmModalModel } from "./model";
 
-export const ConfirmModal = () => {
+export const ConfirmModalWindow = () => {
   useEffect(() => {
-    new ConfirmModalWindowModel({ componentForRender: ConfirmModal });
+    new ConfirmModalModel();
   }, []);
 
   return (

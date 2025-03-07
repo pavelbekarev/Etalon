@@ -1,17 +1,46 @@
-import { ModalManager } from "@/app/plugins/modalManager";
+import ReactDOM from "react-dom/client";
+import { getAttr } from "@/app/utils/getAttr";
+import "../../ModalWindow/style.scss";
+import { ModalWindow } from "../../ModalWindow";
+import React from "react";
+import { ModalManager } from "../../../plugins/modalManager";
+import { ConfirmModalManager } from "@/app/plugins/confirmModalManager";
 
-export class ConfirmModalWindowModel extends ModalManager {
-  componentForRender: any;
+export class ConfirmModalModel {
+  selectors: Object;
 
-  constructor({ componentForRender }: any) {
-    super({ componentForRender });
+  constructor() {
+    this.selectors = {
+      modalInstance: "[data-js-modal-instance]",
+      confirmBtn: "[data-js-modal-confirm]",
+      declineBtn: "[data-js-modal-decline]",
+    };
 
-    this.componentForRender = componentForRender;
     this.bindEvents();
   }
 
-  bindEvents() {
-    super.bindEvents();
-    console.log("сработал bindEvents унаследованного класса");
+  closeModalWindow(): void {
+    const modalInstance = document.querySelector(this.selectors.modalInstance);
+
+    if (modalInstance) modalInstance.remove();
+  }
+
+  private bindEvents() {
+    const root = document.getElementById("root");
+    const confirmBtnNode = document.querySelector(this.selectors.confirmBtn);
+    const declineBtnNode = document.querySelector(this.selectors.declineBtn);
+
+    root?.addEventListener("click", (e: any) => {
+      if (e.target === confirmBtnNode) {
+        /**
+         * TODO: добавлять в cartStore объект с информацией.
+         */
+        console.log("yes");
+      }
+
+      if (e.target === declineBtnNode) {
+        this.closeModalWindow();
+      }
+    });
   }
 }

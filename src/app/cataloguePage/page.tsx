@@ -10,8 +10,8 @@ const cataloguePage = () => {
         imgChild={SocksBanner}
         txtChildAdditional=""
         txtChild="При заказе от 100 000 рублей скидка 7% от прайса"
-      ></IntroBlock>
-      <NewProductsBlock></NewProductsBlock>
+      />
+      <NewProductsBlock />
     </div>
   );
 };

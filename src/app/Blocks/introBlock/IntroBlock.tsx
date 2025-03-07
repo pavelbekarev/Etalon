@@ -16,7 +16,7 @@ const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
     <div className="HeaderBlock">
       <div className="HeaderBlock_container">
         <div className="HeaderBlock_header">
-          <Link href="/mainPage">
+          <Link href="/">
             <div className="HeaderBlock_header_logo">
               <Image src={Logo} alt="" />
             </div>
@@ -49,7 +49,9 @@ const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
             </div>
           </div>
 
-          <button>Посмотреть товары</button>
+          <button>
+            <a href="#NewProductsBlock">Посмотреть товары</a>
+          </button>
         </div>
       </div>
     </div>
