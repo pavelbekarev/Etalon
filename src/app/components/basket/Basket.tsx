@@ -12,13 +12,31 @@ import { BasketModel } from "./model";
 export const Basket = () => {
   const { products, updateQuantity, removeProduct, clearCart } = useCartStore();
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(0);
 
   const handleDecreaseQuantity = (product: any) => {
-    if (product.quantity === 1) {
+    if (product.quantity === 0) {
       removeProduct(product.id);
     }
 
     updateQuantity(product.id, product.quantity - 1);
+  };
+
+  const handleIncreaseQuantity = (product: any) => {
+    console.log("Кол-во до прибавления:", product.quantity);
+    if (product.quantity === 100) return;
+    updateQuantity(product.id, product.quantity++);
+    console.log("Кол-во до прибавления:", product.quantity);
+  };
+
+  const handleChangeProductQuantity = (productId: any, callBack: Function) => {
+    callBack();
+
+    products.map((product) => {
+      if (product.id === productId) {
+        updateQuantity(productId, quantity);
+      }
+    });
   };
 
   useEffect(() => {
@@ -57,22 +75,28 @@ export const Basket = () => {
               <div className="basket__items__item__leftSide__controls">
                 <button
                   className={`basket__items__item__leftSide__controls__quantity ${
-                    product.quantity === 1 &&
+                    product.quantity < 1 &&
                     "basket__items__item__leftSide__controls__quantity--disabled"
                   }`}
                   onClick={() => handleDecreaseQuantity(product)}
-                  disabled={product.quantity === 1}
+                  disabled={product.quantity < 1}
                 >
                   -
                 </button>
-                <span className="basket__items__item__leftSide__controls__quantityCount">
-                  {product.quantity}
-                </span>
+                <input
+                  name="quantity"
+                  onChange={(e) =>
+                    handleChangeProductQuantity(product.id, () =>
+                      setQuantity(Number(e.target.value))
+                    )
+                  }
+                  value={product.quantity}
+                  type="range"
+                />
+                <p style={{ color: "#000" }}>{product.quantity}</p>
                 <button
                   className="basket__items__item__leftSide__controls__quantity"
-                  onClick={() =>
-                    updateQuantity(product.id, product.quantity + 1)
-                  }
+                  onClick={() => handleIncreaseQuantity(product)}
                 >
                   +
                 </button>
