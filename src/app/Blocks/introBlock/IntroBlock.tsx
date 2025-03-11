@@ -1,11 +1,14 @@
+"use client";
+
 import React from "react";
 import { Logo, Search } from "@/app/imgs/imgIndex/imgIndex";
 import Image from "next/image";
 import { IHeader } from "@/app/types/interface";
-import Basket from "@/app/components/basket/Basket";
+import EmptyBasket from "@/app/components/EmptyBasket/EmptyBasket";
 import Registration from "@/app/components/registration/Registration";
 import Link from "next/link";
 import "./IntroBlock.scss";
+import { BasketBlock } from "../BasketBlock/ui";
 
 const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
   const MenuItemAnimationVariant = {
@@ -34,7 +37,7 @@ const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
             </div>
 
             <div className="HeaderBlock_header_navigation_img">
-              <Basket />
+              <BasketBlock />
             </div>
             <div className="HeaderBlock_header_navigation_img">
               <Image src={Search} alt="" />

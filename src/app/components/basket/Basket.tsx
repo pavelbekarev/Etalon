@@ -1,39 +1,117 @@
 "use client";
 
-import React, { useState } from "react";
-import "./Basket.scss";
+import { useCartStore } from "@/app/store/cartStore";
+import React, { useEffect, useState } from "react";
+import "./Basket.scss"; // Подключаем стили
+import { TrashIcon } from "../TrashIcon";
 import Image from "next/image";
-import { BasketI, CloseIcon } from "@/app/imgs/imgIndex/imgIndex";
+import trashImg from "../../imgs/trashImg.svg";
+import { SockImg } from "@/app/imgs/imgIndex/imgIndex";
+import { BasketModel } from "./model";
 
-const Basket = () => {
-  const [isShown, setIsShown] = useState(false);
+export const Basket = () => {
+  const { products, updateQuantity, removeProduct, clearCart } = useCartStore();
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  const handleDecreaseQuantity = (product: any) => {
+    if (product.quantity === 1) {
+      removeProduct(product.id);
+    }
+
+    updateQuantity(product.id, product.quantity - 1);
+  };
+
+  useEffect(() => {
+    new BasketModel();
+  }, []);
+
+  useEffect(() => {
+    var totalSum = 0;
+    products.map((product) => {
+      const a: number = product.price * product.quantity;
+      totalSum += a;
+    });
+
+    setTotalPrice(totalSum);
+  }, [products]);
+
   return (
-    <div>
-      <div
-        className={
-          isShown ? "basket_background_active" : "basket_background_unactive"
-        }
-      ></div>
-      <Image src={BasketI} alt="" onClick={() => setIsShown(true)}></Image>
-      <div className={`Basket ${isShown ? "active" : "unactive"}`}>
-        <div className="Basket_elements">
-          <div className="Basket_close">
-            <Image
-              src={CloseIcon}
-              alt=""
-              onClick={() => setIsShown(false)}
-            ></Image>
+    <div className="basket">
+      {products.length > 0 && (
+        <button className="basket__buttonClear" onClick={clearCart}>
+          Очистить корзину
+        </button>
+      )}
+      <div className="basket__items">
+        {products.map((product: any) => (
+          <div key={product.id} className="basket__items__item">
+            <div className="basket__items__item__leftSide">
+              <div className="basket__items__item__leftSide__imgContainer">
+                <Image
+                  className="basket__items__item__leftSide__imgContainer__img"
+                  src={SockImg}
+                  alt="Изображение товара"
+                />
+              </div>
+
+              <div className="basket__items__item__leftSide__controls">
+                <button
+                  className={`basket__items__item__leftSide__controls__quantity ${
+                    product.quantity === 1 &&
+                    "basket__items__item__leftSide__controls__quantity--disabled"
+                  }`}
+                  onClick={() => handleDecreaseQuantity(product)}
+                  disabled={product.quantity === 1}
+                >
+                  -
+                </button>
+                <span className="basket__items__item__leftSide__controls__quantityCount">
+                  {product.quantity}
+                </span>
+                <button
+                  className="basket__items__item__leftSide__controls__quantity"
+                  onClick={() =>
+                    updateQuantity(product.id, product.quantity + 1)
+                  }
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div className="basket__items__item__rightSide">
+              <div className="basket__items__item__rightSide__info">
+                <p className="basket__items__item__rightSide__info__name basket__items__item__rightSide__text">
+                  {product.name}
+                </p>
+                <p className="basket__items__item__rightSide__info__name basket__items__item__rightSide__text">
+                  {product.article}
+                </p>
+              </div>
+              <div className="basket__items__item__rightSide__bottom">
+                <p className="basket__items__item__rightSide__bottom__price basket__items__item__rightSide__text">
+                  {product.price} руб.
+                </p>
+                <button
+                  className="basket__items__item__rightSide__bottom__remove"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeProduct(product.id);
+                  }}
+                >
+                  <TrashIcon />
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="Basket_Title">Корзина</div>
-          <div className="Basket_txt">
-            Сформируйте заказ и оставьте контактные данные. Мы свяжемся с вами в
-            ближайшее время.{" "}
-          </div>
-          <button>Оформить заявку</button>
-        </div>
+        ))}
       </div>
+      <p className="basket__totalPrice">Итого: {totalPrice} руб.</p>
+      <button
+        data-js-order-button={JSON.stringify(products)}
+        className="basket__orderBtn"
+      >
+        Оформить
+      </button>
     </div>
   );
 };
-
-export default Basket;

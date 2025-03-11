@@ -1,3 +1,5 @@
+"use client";
+
 import IntroBlock from "@/app/Blocks/introBlock/IntroBlock";
 import { SocksBanner } from "@/app/imgs/imgIndex/imgIndex";
 import React from "react";

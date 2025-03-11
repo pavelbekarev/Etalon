@@ -1,10 +1,4 @@
-import ReactDOM from "react-dom/client";
-import { getAttr } from "@/app/utils/getAttr";
 import "../../ModalWindow/style.scss";
-import { ModalWindow } from "../../ModalWindow";
-import React from "react";
-import { ModalManager } from "../../../plugins/modalManager";
-import { ConfirmModalManager } from "@/app/plugins/confirmModalManager";
 
 export class ConfirmModalModel {
   selectors: Object;

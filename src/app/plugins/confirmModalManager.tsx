@@ -60,6 +60,7 @@ export class ConfirmModalManager extends ModalManager {
      * вытаскиваем объект с информацией из атрибута
      */
     root?.addEventListener("click", (e) => {
+      console.log(e.target);
       if (e.target === targetNode) {
         this.openModalWindow();
       }

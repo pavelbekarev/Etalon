@@ -7,6 +7,7 @@ import Image from "next/image";
 import { cardsInfo } from "./constants";
 import { ConfirmModalWindow } from "@/app/components/ConfirmModal";
 import { ConfirmModalManager } from "@/app/plugins/confirmModalManager";
+import { CardModel } from "@/app/components/Card/model/index";
 
 const NewProductsBlock = () => {
   const [mode, setMode] = useState<string>("all");
@@ -16,8 +17,8 @@ const NewProductsBlock = () => {
   const [filtersOpen, setIsFiltersOpen] = useState(false);
 
   useEffect(() => {
-    new ConfirmModalManager(ConfirmModalWindow);
-  }, []);
+    new CardModel();
+  });
 
   const ChooseColor = () => {
     setFilter("color");

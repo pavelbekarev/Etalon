@@ -6,9 +6,10 @@ import { CardBasket, SockImg } from "@/app/imgs/imgIndex/imgIndex";
 
 import { article } from "framer-motion/client";
 import { iCard } from "@/app/types/interface";
+import { CardModel } from "./model";
 
 const Card = ({ id, name, article, price }: iCard) => {
-  const cartData = JSON.stringify({ name, article, price });
+  const cartData = JSON.stringify({ id, name, article, price });
 
   /**
    * Используется атрибут "data-js-cart-button" для взаимодействия через modalManager.
