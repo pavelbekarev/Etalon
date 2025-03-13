@@ -1,18 +1,40 @@
 "use client";
 
-import React from "react";
-import { Logo, Search } from "@/app/imgs/imgIndex/imgIndex";
+import React, { useEffect, useState } from "react";
+import { Logo, Search, User } from "@/app/imgs/imgIndex/imgIndex";
 import Image from "next/image";
 import { IHeader } from "@/app/types/interface";
-import EmptyBasket from "@/app/components/EmptyBasket/EmptyBasket";
-import Registration from "@/app/components/registration/Registration";
 import Link from "next/link";
 import "./IntroBlock.scss";
 import { BasketBlock } from "../BasketBlock/ui";
+import { Authorization } from "@/app/Authorization";
+import { OrderList } from "../OrderList";
 
-const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
+export const IntroBlock = ({
+  imgChild,
+  txtChild,
+  txtChildAdditional,
+}: IHeader) => {
   const MenuItemAnimationVariant = {
     animate: { width: 30 },
+  };
+
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [userLogin, setUserLogin] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("userLogin")) {
+      setIsLogged(true);
+      setUserLogin(localStorage.getItem("userLogin"));
+    }
+  }, []);
+
+  /**
+   * Прокидываем в <Authorization /> для плавного обновления страницы в случае успешной авторизации.
+   */
+  const handleLogin = () => {
+    setIsLogged(true);
+    setUserLogin(localStorage.getItem("userLogin"));
   };
 
   return (
@@ -33,7 +55,11 @@ const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
               </Link>
             </div>
             <div className="HeaderBlock_header_navigation_img">
-              <Registration />
+              {isLogged ? (
+                <OrderList />
+              ) : (
+                <Authorization onLoginSuccess={handleLogin} />
+              )}
             </div>
 
             <div className="HeaderBlock_header_navigation_img">
@@ -60,5 +86,3 @@ const IntroBlock = ({ imgChild, txtChild, txtChildAdditional }: IHeader) => {
     </div>
   );
 };
-
-export default IntroBlock;

@@ -1,9 +1,9 @@
 "use client";
 
-import IntroBlock from "@/app/Blocks/introBlock/IntroBlock";
 import { SocksBanner } from "@/app/imgs/imgIndex/imgIndex";
 import React from "react";
 import NewProductsBlock from "../Blocks/newProductsBlock/NewProductsBlock";
+import { IntroBlock } from "../Blocks/introBlock/IntroBlock";
 
 const cataloguePage = () => {
   return (

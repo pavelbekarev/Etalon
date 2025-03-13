@@ -29,6 +29,7 @@
   background-color: #fff;
   z-index: 10;
 }
+
 .HeaderBlock_header_logo {
   padding-left: 108px;
 }
@@ -37,6 +38,7 @@
   padding-right: 108px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 .HeaderBlock_header_navigation_catalogue {
@@ -76,7 +78,7 @@
 
 .HeaderBlock_header_navigation_catalogue_txt {
   z-index: 2;
-  font-size: 26px;
+  font-size: 3rem;
   font-weight: 600;
 }
 
@@ -96,14 +98,17 @@
 }
 
 .HeaderBlock_main::after {
-    content: '';
-    position: absolute;
-    top: 100;
-    border-radius: 25px;
-    background: linear-gradient(#00000080, #2D2D2D73); /* Это затемнение. Его степень можно отрегулировать... */
-    height: 700px;
-    width: 1447px;
-  }
+  content: "";
+  position: absolute;
+  top: 100;
+  border-radius: 25px;
+  background: linear-gradient(
+    #00000080,
+    #2d2d2d73
+  ); /* Это затемнение. Его степень можно отрегулировать... */
+  height: 700px;
+  width: 1447px;
+}
 
 .HeaderBlock_main_links {
   display: flex;
@@ -191,7 +196,6 @@
   transition: ease-in-out;
 }
 .HeaderBlock_main button:hover {
-  background-color: #C44536;
+  background-color: #c44536;
   color: #fff;
 }
-
