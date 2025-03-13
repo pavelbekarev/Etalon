@@ -8,9 +8,11 @@ import Image from "next/image";
 import trashImg from "../../imgs/trashImg.svg";
 import { SockImg } from "@/app/imgs/imgIndex/imgIndex";
 import { BasketModel } from "./model";
+import { IOrder, IProduct } from "@/app/types/interface";
 
 export const Basket = () => {
-  const { products, updateQuantity, removeProduct, clearCart } = useCartStore();
+  const { products, updateQuantity, removeProduct, clearCart, addOrder } =
+    useCartStore();
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(0);
 
@@ -40,10 +42,6 @@ export const Basket = () => {
   };
 
   useEffect(() => {
-    new BasketModel();
-  }, []);
-
-  useEffect(() => {
     var totalSum = 0;
     products.map((product) => {
       const a: number = product.price * product.quantity;
@@ -52,6 +50,30 @@ export const Basket = () => {
 
     setTotalPrice(totalSum);
   }, [products]);
+
+  const sendToOrders = (products: string): void => {
+    const totalProducts: IProduct[] = [];
+
+    JSON.parse(products).map((product: any) => {
+      const newProduct: IProduct = {
+        id: product.id,
+        name: product.name,
+        article: product.article,
+        price: product.price,
+        quantity: product.quantity,
+      };
+
+      totalProducts.push(newProduct);
+    });
+
+    // TODO: в стор добавлять заявку
+    const order: IOrder = {
+      products: totalProducts,
+      totalPrice: totalPrice,
+    };
+
+    addOrder(order);
+  };
 
   return (
     <div className="basket">
@@ -131,6 +153,7 @@ export const Basket = () => {
       </div>
       <p className="basket__totalPrice">Итого: {totalPrice} руб.</p>
       <button
+        onClick={() => sendToOrders(JSON.stringify(products))}
         data-js-order-button={JSON.stringify(products)}
         className="basket__orderBtn"
       >

@@ -3,32 +3,18 @@
  */
 import { persist, subscribeWithSelector } from "zustand/middleware";
 import { create } from "zustand";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  article: number;
-  quantity: number;
-}
-
-interface CartStore {
-  products: Product[];
-  addProduct: (product: Product) => void;
-  removeProduct: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
-  clearCart: () => void;
-}
+import { ICartStore, IOrder } from "../types/interface";
 
 /**
  * Функция для создания хранилища с уникальным именем
  * @param {string} storageName
  * @return {Function}
  */
-export const useCartStore = create<CartStore>()(
+export const useCartStore = create<ICartStore>()(
   persist(
     (set) => ({
       products: [],
+      orders: [],
 
       addProduct: (product) =>
         set((state) => {
@@ -60,6 +46,21 @@ export const useCartStore = create<CartStore>()(
         })),
 
       clearCart: () => set({ products: [] }),
+
+      addOrder: (order: IOrder) =>
+        set((state) => {
+          const existingOrder = state.orders.find((o) => o.id === order.id);
+
+          if (existingOrder) {
+            return {
+              orders: state.orders.map((o) =>
+                o.id === order.id ? { ...o } : o
+              ),
+            };
+          }
+
+          return { orders: [...state.orders, { ...order }] };
+        }),
     }),
     {
       name: "cart-storage", // Ключ в localStorage
