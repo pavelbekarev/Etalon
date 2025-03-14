@@ -49,15 +49,7 @@ export const useCartStore = create<ICartStore>()(
 
       addOrder: (order: IOrder) =>
         set((state) => {
-          const existingOrder = state.orders.find((o) => o.id === order.id);
-
-          if (existingOrder) {
-            return {
-              orders: state.orders.map((o) =>
-                o.id === order.id ? { ...o } : o
-              ),
-            };
-          }
+          // const existingOrder = state.orders.find((o) => o.id === order.id);
 
           return { orders: [...state.orders, { ...order }] };
         }),

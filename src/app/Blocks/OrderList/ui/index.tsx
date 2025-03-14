@@ -7,6 +7,51 @@ export const OrderList = () => {
   const { orders } = useCartStore();
 
   return (
+    //#region
+    // <div className="orderList">
+    //   <h2 className="orderList__title" onClick={() => setIsOpen(true)}>
+    //     Мои заявки
+    //   </h2>
+
+    //   {/* Затемнение фона при открытом модальном окне */}
+    //   {isOpen && (
+    //     <div className="modal__overlay" onClick={() => setIsOpen(false)}></div>
+    //   )}
+
+    //   {/* Модальное окно */}
+    //   <div className={`modal ${isOpen ? "modal--open" : ""}`}>
+    //     <button className="modal__close" onClick={() => setIsOpen(false)}>
+    //       ✖
+    //     </button>
+    //     <div className="orderList__items">
+    //       {orders.map((order, key) => {
+    //         return (
+    //           <div className="orderList__items__item" key={key}>
+    //             <div className="orderList__items__item__products">
+    //               {order.products.map((product, key) => {
+    //                 return (
+    //                   <div className="orderList__items__item__products__product">
+    //                     <p className="orderList__items__item__products__product__productName">
+    //                       Наименование: {product.name}
+    //                     </p>
+    //                     <p className="orderList__items__item__products__product__quantity">
+    //                       Количество: {product.quantity}
+    //                     </p>
+    //                   </div>
+    //                 );
+    //               })}
+    //             </div>
+    //             <p className="orderList__items__item__totalPrice">
+    //               Итого: {order.totalPrice} руб.
+    //             </p>
+    //           </div>
+    //         );
+    //       })}
+    //     </div>
+    //   </div>
+    // </div>
+    //#endregion
+
     <div className="orderList">
       <h2 className="orderList__title" onClick={() => setIsOpen(true)}>
         Мои заявки
@@ -22,19 +67,52 @@ export const OrderList = () => {
         <button className="modal__close" onClick={() => setIsOpen(false)}>
           ✖
         </button>
-        <h3>Мои заявки</h3>
-        <div>
-          {orders.map((order, key) => {
-            return (
-              <div key={key}>
-                {order.products.map((item, key) => {
-                  return <p key={key}>{item.name}</p>;
-                })}
-                <p>totalPrice: {order.totalPrice}</p>
-              </div>
-            );
-          })}
-        </div>
+
+        <table className="orderList__items orderList__table">
+          <thead className="orderList__items__head">
+            <tr className="orderList__items__head__row">
+              <th className="orderList__items__head__row__item">Артикул</th>
+              <th className="orderList__items__head__row__item">
+                Наименование
+              </th>
+              <th className="orderList__items__head__row__item">Цена</th>
+              <th className="orderList__items__head__row__item">Количество</th>
+              <th className="orderList__items__head__row__item">Итого</th>
+            </tr>
+          </thead>
+          <tbody className="orderList__items__body">
+            {orders.map((order, orderIndex) =>
+              order.products.map((product, productIndex) => (
+                <tr
+                  className="orderList__items__body__row"
+                  key={`${orderIndex}-${productIndex}`}
+                >
+                  <td className="orderList__items__body__row__item">
+                    {product.article}
+                  </td>
+                  <td className="orderList__items__body__row__item">
+                    {product.name}
+                  </td>
+                  <td className="orderList__items__body__row__item">
+                    {product.price} руб.
+                  </td>
+                  <td className="orderList__items__body__row__item">
+                    {product.quantity}
+                  </td>
+
+                  {productIndex === 0 && (
+                    <td
+                      className="orderList__items__body__row__item"
+                      rowSpan={order.products.length}
+                    >
+                      {order.totalPrice} руб.
+                    </td>
+                  )}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

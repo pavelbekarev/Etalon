@@ -306,7 +306,6 @@ const NewProductsBlock = () => {
               }`}
             ></div>
             {cardsInfo.map((item, key) => {
-              console.log(key);
               return (
                 <Card
                   key={key}

@@ -11,8 +11,14 @@ import { BasketModel } from "./model";
 import { IOrder, IProduct } from "@/app/types/interface";
 
 export const Basket = () => {
-  const { products, updateQuantity, removeProduct, clearCart, addOrder } =
-    useCartStore();
+  const {
+    products,
+    orders,
+    updateQuantity,
+    removeProduct,
+    clearCart,
+    addOrder,
+  } = useCartStore();
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(0);
 
@@ -52,6 +58,7 @@ export const Basket = () => {
   }, [products]);
 
   const sendToOrders = (products: string): void => {
+    console.log(products);
     const totalProducts: IProduct[] = [];
 
     JSON.parse(products).map((product: any) => {
@@ -71,8 +78,11 @@ export const Basket = () => {
       products: totalProducts,
       totalPrice: totalPrice,
     };
+    console.log(order);
 
     addOrder(order);
+    clearCart();
+    console.log(orders);
   };
 
   return (
