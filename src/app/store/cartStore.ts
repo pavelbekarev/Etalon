@@ -1,7 +1,4 @@
-/**
- * TODO: сдлеать стор для хранения товаров, помещенных в корзину
- */
-import { persist, subscribeWithSelector } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { create } from "zustand";
 import { ICartStore, IOrder } from "../types/interface";
 
@@ -36,8 +33,6 @@ export const useCartStore = create<ICartStore>()(
           products: state.products.filter((p) => p.id !== id),
         })),
 
-      checkWorking: () => set(() => console.log("this is working!")),
-
       updateQuantity: (id, quantity) =>
         set((state) => ({
           products: state.products.map((p) =>
@@ -56,7 +51,7 @@ export const useCartStore = create<ICartStore>()(
     }),
     {
       name: "cart-storage", // Ключ в localStorage
-      getStorage: () => localStorage,
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

@@ -26,10 +26,10 @@ const Registration = () => {
     setIsRegShown(true);
   };
 
-  const [email, setEmail] = React.useState(null);
-  const [login, setLogin] = React.useState(null);
-  const [password, setPassword] = React.useState(null);
-  const [passwordConfirm, setConfPassword] = React.useState(null);
+  const [email, setEmail] = React.useState<string>("");
+  const [login, setLogin] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
+  const [passwordConfirm, setConfPassword] = React.useState<string>("");
 
   const router = useRouter();
 

@@ -5,8 +5,6 @@ import Card from "@/app/components/Card/Card";
 import { ArrowBack, ArrowUp, Filter_Arrow } from "@/app/imgs/imgIndex/imgIndex";
 import Image from "next/image";
 import { cardsInfo } from "./constants";
-import { ConfirmModalWindow } from "@/app/components/ConfirmModal";
-import { ConfirmModalManager } from "@/app/plugins/confirmModalManager";
 import { CardModel } from "@/app/components/Card/model/index";
 
 const NewProductsBlock = () => {

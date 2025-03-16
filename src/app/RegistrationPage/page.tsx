@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import "./style.scss";
 
 export default function RegistrationPage() {
-  const [email, setEmail] = React.useState(null);
-  const [login, setLogin] = React.useState(null);
-  const [password, setPassword] = React.useState(null);
-  const [passwordConfirm, setConfPassword] = React.useState(null);
+  const [email, setEmail] = React.useState<string>("");
+  const [login, setLogin] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
+  const [passwordConfirm, setConfPassword] = React.useState<string>("");
 
   const router = useRouter();
 
@@ -68,10 +68,12 @@ export default function RegistrationPage() {
         <input
           className="registrationPage__form__input"
           placeholder="Email"
-          type="text"
+          type="email"
           name="email"
           required
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
         />
         <label
           className="registrationPage__form__label"
@@ -85,7 +87,9 @@ export default function RegistrationPage() {
           type="text"
           name="login"
           required
-          onChange={(e) => setLogin(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setLogin(e.target.value)
+          }
         />
         <label
           className="registrationPage__form__label"
@@ -99,7 +103,9 @@ export default function RegistrationPage() {
           type="password"
           name="password"
           required
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
         />
         <label
           className="registrationPage__form__label"
@@ -113,7 +119,9 @@ export default function RegistrationPage() {
           type="password"
           name="confirmPassword"
           required
-          onChange={(e) => setConfPassword(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setConfPassword(e.target.value)
+          }
         />
         <button
           className="registrationPage__form__subBtn"
