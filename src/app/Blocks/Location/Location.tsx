@@ -8,7 +8,6 @@ const Location = () => {
       <div className="lTitle">
         <p className="l_Title">Где мы находимся</p>
       </div>
-
       <div className="main_container">
         <div className="location_container">
           <div style={{ position: "relative", overflow: "hidden" }}>

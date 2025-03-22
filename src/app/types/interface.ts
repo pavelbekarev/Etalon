@@ -1,65 +1,45 @@
-export interface IHeader{
-    imgChild: any;
-    txtChild: string;
-    txtChildAdditional: string;
+export interface IHeader {
+  imgChild: any;
+  txtChild: string;
+  txtChildAdditional: string;
 }
 
-export interface iCard{
-    id: string
-    article: string
-    title:string
-    ImgUrls: string
-    priceDef:number
-}
-export type CartRecord={
-    id:string  
-    article: string
-    title:string
-    countProduct:number
-    priceDef:number
-
+export interface iCard {
+  id: string;
+  title: string;
+  priceDef: number;
+  article: string;
+  ImgUrls: string;
 }
 
-export type Cart={
-    Record:CartRecord[]
+export interface ICartRecord {
+  id: string;
+  title: string;
+  priceDef: number;
+  article: string;
+  countProduct: number;
 }
 
-export type Product={
-    article: string,
-    id:string  ,
-    createdAt:string ,
-    updatedAt:string,
-    deletedAt:string ,
-    title:string,
-    properties:string,
-    ImgUrls: string,
-    priceDef:number,
-    priceNDS:number,
-    inStock:number,
-    min:number,
-    max:number,
-    categoryId:string,
-}
-export type UserLocal={
-    userEmail:string
-    userLogin:string
-    userToken:string
-
+export interface IProduct {
+  id: string;
+  title: string;
+  priceDef: number;
+  article: string;
+  inStock: number;
+  ImgUrls: string;
 }
 
-/*
- "id": "",
-        "createdAt": "2024-12-19T13:42:59.000Z",
-        "updatedAt": "2024-12-19T13:42:59.000Z",
-        "deletedAt": null,
-        "title": "Гладь с рисунком «горох»",
-        "article": "1911-2",
-        "properties": "Хлопок 60%, Полиамид 40%",
-        "ImgUrls": "D:\\VS2010Test\\Nest\\etalon\\server\\uploads\\sock.png",
-        "priceDef": 60,
-        "priceNDS": 60,
-        "inStock": 10,
-        "min": 35,
-        "max": 40,
-        "categoryId": "10a2a5cc-91d1-4a98-87d1-855f050c0d0c"
-*/
+export interface IOrder {
+  Record: ICartRecord[];
+  TotalCost: number;
+}
+
+export interface ICartStore {
+  products: ICartRecord[];
+  orders: IOrder[];
+  addProduct: (product: ICartRecord) => void;
+  removeProduct: (id: string) => void;
+  updateQuantity: (id: string, countProduct: number) => void;
+  clearCart: () => void;
+  addOrder: (order: IOrder) => void;
+}

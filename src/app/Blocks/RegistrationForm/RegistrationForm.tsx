@@ -1,17 +1,11 @@
-import "./RegistrationForm.scss"
+import "./RegistrationForm.scss";
 
 export default function Example() {
-
   return (
     <>
-      {}
       <div className="back_form">
-        
-
         <div className="def_form">
-
           <form action="#" method="POST" className="space-y-2">
-
             <div>
               <div className="mt-2">
                 <input
@@ -36,13 +30,11 @@ export default function Example() {
                   autoComplete="email"
                   className="input_"
                   placeholder="Электронная почта"
-                  
                 />
               </div>
             </div>
 
             <div>
-              
               <div className="mt-2">
                 <input
                   id="tel"
@@ -57,31 +49,18 @@ export default function Example() {
             </div>
 
             <div className="checkbox">
-            
-            <input 
-            type="checkbox" 
-            id="consentCheckbox" 
-            required
-            
-            />
-             <p>Я согласен на обработку персональных данных</p>
-            
-            
+              <input type="checkbox" id="consentCheckbox" required />
+              <p>Я согласен на обработку персональных данных</p>
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="button"
-              >
+              <button type="submit" className="button">
                 Отправить заявку
               </button>
             </div>
           </form>
-
-
         </div>
       </div>
     </>
-  )
+  );
 }
