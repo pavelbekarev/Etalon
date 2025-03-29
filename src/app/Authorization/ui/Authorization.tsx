@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import "../style.scss";
 import { User } from "@/app/imgs/imgIndex/imgIndex";
 import Image from "next/image";
+import { UserLocal } from "@/app/types/types";
 
 interface AuthorizationProps {
   onLoginSuccess: () => void;
@@ -28,10 +29,16 @@ export const Authorization: React.FC<AuthorizationProps> = ({
         password: password,
       });
 
-      localStorage.setItem("userToken", res.data.acessToken);
-      localStorage.setItem("userEmail", email);
-      localStorage.setItem("userLogin", login);
+      // localStorage.setItem("userToken", res.data.acessToken);
+      // localStorage.setItem("userEmail", email);
+      // localStorage.setItem("userLogin", login);
 
+      var user: UserLocal={
+        userEmail:email,
+        userLogin:login,
+        userToken:res.data.acessToken
+      }
+      localStorage.setItem("user", JSON.stringify(user));
       onLoginSuccess(); // Вызываем функцию обновления состояния
       router.push("/");
     } catch (e) {

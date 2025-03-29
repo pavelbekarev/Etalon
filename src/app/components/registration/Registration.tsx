@@ -6,6 +6,7 @@ import Image from "next/image";
 import "./Registration.scss";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { UserLocal } from "@/app/types/types";
 
 const Registration = () => {
   const [isRegShown, setIsRegShown] = useState(false);
@@ -64,10 +65,15 @@ const Registration = () => {
             password: password,
           }
         );
-
-        localStorage.setItem("userToken", resLogin.data.acessToken);
-        localStorage.setItem("userEmail", email);
-        localStorage.setItem("userLogin", login);
+        var user: UserLocal={
+          userEmail:email,
+          userLogin:login,
+          userToken:resLogin.data.acessToken
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+        // localStorage.setItem("userToken", resLogin.data.acessToken);
+        // localStorage.setItem("userEmail", email);
+        // localStorage.setItem("userLogin", login);
         router.push("/");
       } else {
         alert("Заполните все поля!");
@@ -77,6 +83,9 @@ const Registration = () => {
     }
   };
 
+  const SaveUser=async (acessToken:string) =>{
+   
+  }
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <div

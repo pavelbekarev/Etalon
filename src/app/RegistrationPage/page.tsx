@@ -4,6 +4,7 @@ import React from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import "./style.scss";
+import { UserLocal } from "../types/types";
 
 export default function RegistrationPage() {
   const [email, setEmail] = React.useState<string>("");
@@ -44,9 +45,15 @@ export default function RegistrationPage() {
           }
         );
 
-        localStorage.setItem("userToken", resLogin.data.acessToken);
-        localStorage.setItem("userEmail", email);
-        localStorage.setItem("userLogin", login);
+        var user: UserLocal={
+          userEmail:email,
+          userLogin:login,
+          userToken:resLogin.data.acessToken
+        }
+        localStorage.setItem("user", JSON.stringify(user));
+        // localStorage.setItem("userToken", resLogin.data.acessToken);
+        // localStorage.setItem("userEmail", email);
+        // localStorage.setItem("userLogin", login);
         router.push("/");
       } else {
         alert("Заполните все поля!");
