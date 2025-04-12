@@ -1,23 +1,18 @@
-.HeaderBlock {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .HeaderBlock {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
 .HeaderBlock_container {
   margin-top: 30px;
-  width: 90%;
+  width: 100%;
   border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 30px;
   position: relative;
   padding-bottom: 90px;
 }
 .HeaderBlock_header {
-  width: 1450px;
+  width: 100%;
   display: flex;
   padding-bottom: 15px;
   justify-content: space-between;
@@ -84,7 +79,7 @@
 
 .HeaderBlock_main {
   height: 700px;
-  width: 1447px;
+  width: 100%;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
@@ -94,20 +89,20 @@
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 100%;
-  margin-top: 160px;
+  margin-top: 130px;
+  position: relative;
 }
 
 .HeaderBlock_main::after {
   content: "";
   position: absolute;
-  top: 100;
   border-radius: 25px;
   background: linear-gradient(
     #00000080,
     #2d2d2d73
   ); /* Это затемнение. Его степень можно отрегулировать... */
   height: 700px;
-  width: 1447px;
+  width: 100%;
 }
 
 .HeaderBlock_main_links {
@@ -198,4 +193,30 @@
 .HeaderBlock_main button:hover {
   background-color: #c44536;
   color: #fff;
+}
+@media (max-width: 600px) {
+  .HeaderBlock_main_txt{
+    margin-left: 10px;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+  .HeaderBlock_main{
+    background-position: unset;
+    background-size: unset;
+    height: 100%;
+  }
+  .HeaderBlock_main button {
+    font-size: 24px;
+    font-weight: 700;
+    width: 70%;
+    height: 100px;
+    z-index: 2;
+    color: #2c2c2a;
+    margin: 20px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    border: none;
+    transition: 0.3s;
+  }
+  
 }

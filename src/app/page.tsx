@@ -3,7 +3,8 @@ import AboutBlock from "./Blocks/AboutBlock/AboutBlock";
 import Slider from "./Blocks/Slider/Slider";
 import Form from "./Blocks/Form/Form";
 import PartnersBlock from "./Blocks/PartnersBlock/PartnersBlock";
-
+// import "bootstrap/dist/css/bootstrap.min.css"
+// import "bootstrap/dist/js/bootstrap.bundle.js"
 import { IntroBlockBg } from "./imgs/imgIndex/imgIndex";
 import Footer from "./components/footer/Footer";
 import AchievementsBlock from "./Blocks/achievementsBlock/AchievementsBlock";
@@ -24,12 +25,13 @@ export default function Home() {
   }, []);
 
   return (
+    <>
+    <IntroBlock
+      imgChild={IntroBlockBg}
+      txtChildAdditional="носки премиального качества с уникальным дизайном для вашего бизнеса"
+      txtChild="Носочная фабрика «Эталон»"
+    />
     <div className="container">
-      <IntroBlock
-        imgChild={IntroBlockBg}
-        txtChildAdditional="носки премиального качества с уникальным дизайном для вашего бизнеса"
-        txtChild="Носочная фабрика «Эталон»"
-      />
       <NumBLock />
       <HistoryBlock />
       <AboutBlock />
@@ -38,5 +40,6 @@ export default function Home() {
       <Form />
       <Footer />
     </div>
+    </>
   );
 }

@@ -23,9 +23,9 @@ export const IntroBlock = ({
   const [userLogin, setUserLogin] = useState<string | null>(null);
 
   useEffect(() => {
-    if (localStorage.getItem("userLogin")) {
+    if (localStorage.getItem("user")) {
       setIsLogged(true);
-      setUserLogin(localStorage.getItem("userLogin"));
+      setUserLogin(localStorage.getItem("user"));
     }
   }, []);
 
@@ -34,11 +34,14 @@ export const IntroBlock = ({
    */
   const handleLogin = () => {
     setIsLogged(true);
-    setUserLogin(localStorage.getItem("userLogin"));
+    setUserLogin(localStorage.getItem("user"));
   };
 
   return (
-    <div className="HeaderBlock">
+
+<>
+
+    
       <div className="HeaderBlock_container">
         <div className="HeaderBlock_header">
           <Link href="/">
@@ -70,6 +73,7 @@ export const IntroBlock = ({
             </div>
           </div>
         </div>
+        <div className="container">
         <div className="HeaderBlock_main">
           <div className="HeaderBlock_main_txt">
             {txtChild}
@@ -81,8 +85,10 @@ export const IntroBlock = ({
           <button>
             <a href="#NewProductsBlock">Посмотреть товары</a>
           </button>
+         
+        </div>
         </div>
       </div>
-    </div>
+      </>
   );
 };

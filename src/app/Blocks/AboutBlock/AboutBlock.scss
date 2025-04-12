@@ -1,35 +1,45 @@
 .AboutBlock_title {
   margin-top: 70px;
   margin-bottom: 30px;
-  margin-left: 323px;
   font-size: 40px;
   font-weight: 600;
+  text-align: center;
 }
-
-.card_container1 {
+.card_container {
   //   margin-left: 323px;
-  margin: 0 auto;
+  margin: 0 40px;
   display: flex;
   flex-direction: row;
-  gap: 17px;
+  flex-wrap: wrap;
   width: 100%;
-  max-width: 1273px;
+  justify-content: center;
 }
-
-.card_container2 {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  gap: 17px;
-  width: 100%;
-  max-width: 1273px;
-}
-
-.InfoBlock1 {
-  height: 310px !important;
-  width: 413px !important;
+// .InfoBlock1 {
+//   border-radius: 16px;
+//   margin: 15px;
+//   display: flex;
+//   flex-direction: column;
+// }
+.InfoBlock{
+    
+  max-height: 310px;
+  max-width: 400px;
+  border-width: 1.5px;
   border-radius: 16px;
-  margin-bottom: 17px;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0px 5px 5px 1px rgba(112, 111, 111, 0.25);
+  background-color: #ffffff;
+  margin: 10px;
+}
+.InfoBlock_title{
+  font-weight: 600;
+  font-size: 24px;
+  padding-top: 20px;
+  padding-left: 35px;
+}
+.InfoBlock_txt{
+  font-weight: 400;
+  font-size: 18px;
+  padding-top: 22px;
+  padding-left: 35px;
+  padding-right: 20px;
 }

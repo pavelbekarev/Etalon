@@ -17,10 +17,10 @@ const Card = ({ id, title, article, priceDef,ImgUrls }: iCard) => {
    * Используется атрибут "data-js-cart-button" для взаимодействия через modalManager.
    * При клике на кнопку с атрибутом "data-js-cart-button" будет открываться модальное окно
    */
-  const url='https://serveretalon.cloudpub.ru/'+ImgUrls;
+  const url='http://95.163.228.30:80/'+ImgUrls;
   return (
     <div className="Card_container" data-js-card-id={id} key={id}>
-      <img src={'https://serveretalon.cloudpub.ru/'+ImgUrls} alt=""/>
+      <img src={'http://95.163.228.30:80/'+ImgUrls} alt=""/>
       <div className="Card_container_main">
         <div className="Card_container_main_name">{title}</div>
         <div className="Card_container_main_bottom">

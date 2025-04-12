@@ -28,7 +28,7 @@ export default function RegistrationPage() {
         passwordConfirm !== null
       ) {
         const resRegistration = await axios.post(
-          "http://localhost:4000/api/auth/reg/",
+          "http://95.163.228.30:80/api/auth/reg/",
           {
             email: email,
             login: login,
@@ -37,7 +37,7 @@ export default function RegistrationPage() {
         );
 
         const resLogin = await axios.post(
-          "http://localhost:4000/api/auth/login",
+          "http://95.163.228.30:80/api/auth/login",
           {
             email: email,
             login: login,

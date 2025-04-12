@@ -35,7 +35,7 @@ const Footer = () => {
           <div className="column_2">
             <p className="txt_2">Главная</p>
 
-            <div className="main_parts">
+            <div className="parts">
               <p>О нас</p>
               <p>Наши ценности</p>
               <p>Отзывы</p>
@@ -43,10 +43,10 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="column_3">
-            <p className="txt_3">Каталог</p>
+          <div className="column_2">
+            <p className="txt_2">Каталог</p>
 
-            <div className="catalog_parts">
+            <div className="parts">
               <p>Мужские</p>
               <p>Женские</p>
               <p>Детские</p>

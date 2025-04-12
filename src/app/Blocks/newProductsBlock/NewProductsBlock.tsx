@@ -33,7 +33,7 @@ const NewProductsBlock = () => {
   };
   const [products, setProducts] = useState<IProduct[]>([])
     const getProducts = async () => {
-      const data: IProduct[] = await axios.get("http://localhost:4000/api/product/products/", {
+      const data: IProduct[] = await axios.get("http://95.163.228.30:80/api/product/products/", {
         headers: {
           Authorization: localStorage.getItem('userToken') || "",
           email: localStorage.getItem('userEmail') || "",
