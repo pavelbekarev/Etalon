@@ -20,6 +20,7 @@ export const IntroBlock = ({
   };
 
   const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [isCollapsed, setCollapsed] = useState<boolean>(false);
   const [userLogin, setUserLogin] = useState<string | null>(null);
 
   useEffect(() => {
@@ -49,7 +50,13 @@ export const IntroBlock = ({
               <Image src={Logo} alt="" />
             </div>
           </Link>
-          <div className="HeaderBlock_header_navigation">
+          <button className="btn-navbar-toggler" onClick={()=>{
+              console.log(isCollapsed)
+              setCollapsed(!isCollapsed)
+            }}>
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className={`${isCollapsed ? '':'collapse_header_navigation'} HeaderBlock_header_navigation `}>
             <div className="HeaderBlock_header_navigation_catalogue">
               <Link href="/cataloguePage">
                 <div className="HeaderBlock_header_navigation_catalogue_txt">
@@ -83,7 +90,7 @@ export const IntroBlock = ({
           </div>
 
           <button>
-            <a href="#NewProductsBlock">Посмотреть товары</a>
+            <a href="/cataloguePage">Посмотреть товары</a>
           </button>
          
         </div>

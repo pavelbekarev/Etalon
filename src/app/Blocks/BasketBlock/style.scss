@@ -17,9 +17,9 @@
 .BasketModal {
   position: fixed;
   top: 0;
-  right: -1000px; /* Скрываем за экраном */
-  width: 950px;
-  height: 100vh;
+  right: -100%; /* Скрываем за экраном */
+  width: 30%;
+  height: 100%;
   background: white;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease-in-out;
@@ -68,4 +68,11 @@
   margin-top: 10px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+@media (max-width: 900px) {
+  .BasketModal{
+    
+    width: 100%;
+  }
 }
