@@ -49,7 +49,7 @@ const Registration = () => {
         password.length > 5
       ) {
         const resRegistration = await axios.post(
-          "http://95.163.228.30:80/api/auth/reg/",
+          "https://etalon-socks.ru/nest/api/auth/reg/",
           {
             email: email,
             login: login,
@@ -58,7 +58,7 @@ const Registration = () => {
         );
 
         const resLogin = await axios.post(
-          "http://95.163.228.30:80/api/auth/login",
+          "https://etalon-socks.ru/nest/api/auth/login",
           {
             email: email,
             login: login,

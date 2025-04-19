@@ -117,7 +117,7 @@ export const Basket = () => {
         login: userLoc.userLogin
       })
       //сохраняем в бд заказ пользователя из корзины
-      await axios.post("http://95.163.228.30:80/api/story/create", {
+      await axios.post("https://etalon-socks.ru/nest/api/story/create", {
         Record: order.Record,
         TotalCost: order.TotalCost
       },

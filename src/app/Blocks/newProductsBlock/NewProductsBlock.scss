@@ -17,7 +17,8 @@
   gap: 20px;
   max-width: 1280px;
   margin-bottom: 70px;
-  position: relative;
+  position: relative;   
+   justify-content: center;
 }
 
 .NewProductsBlock_btn {
@@ -51,6 +52,7 @@
   justify-content: space-between;
   margin-top: 70px;
   margin-bottom: 70px;
+  flex-wrap: wrap;
 }
 
 .NewProductsBlock_header_left {
@@ -63,6 +65,7 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .NewProductsBlock_header_left_filters {
@@ -116,7 +119,7 @@
   margin-top: 45px;
   display: flex;
   flex-direction: column;
-  width: 375px;
+  // width: 375px;
   display: flex;
   gap: 15px;
   justify-content: center;
@@ -183,7 +186,7 @@
 .NewProductsBlock_container_background.background_active {
   background-color: #ffffff30;
   height: 105%;
-  width: 105%;
+  width: 100%;
   position: absolute;
   backdrop-filter: blur(2px);
   display: block;
@@ -226,7 +229,7 @@
   color: #2d2d2d;
   margin-top: 45px;
   z-index: 1001;
-  margin-left: 440px;
+  margin-left: 220px;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 20px;
@@ -258,9 +261,9 @@
   margin: 0;
 }
 
-.NewProductsBlock_header_left_filters_filters_additional_type {
-  width: 375px;
-}
+// .NewProductsBlock_header_left_filters_filters_additional_type {
+//   // width: 375px;
+// }
 
 .NewProductsBlock_header_left_filters_filters_additional_type_top {
   display: flex;
@@ -311,7 +314,7 @@
   color: #2d2d2d;
   margin-top: 45px;
   z-index: 1001;
-  margin-left: 440px;
+  margin-left: 220px;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 20px;
@@ -321,7 +324,7 @@
 .NewProductsBlock_header_left_filters_filters_additional_color_container {
   display: flex;
   flex-direction: column;
-  width: 375px;
+  // width: 375px;
   justify-content: center;
 }
 .NewProductsBlock_header_left_filters_filters_additional_color_top {
@@ -366,15 +369,15 @@
   color: #2d2d2d;
   margin-top: 45px;
   z-index: 1001;
-  margin-left: 440px;
+  margin-left: 220px;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.NewProductsBlock_header_left_filters_filters_additional_size {
-  width: 375px;
-}
+// .NewProductsBlock_header_left_filters_filters_additional_size {
+//   // width: 375px;
+// }
 .NewProductsBlock_header_left_filters_filters_additional_size_top {
   display: flex;
   flex-direction: row;

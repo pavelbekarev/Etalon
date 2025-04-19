@@ -26,7 +26,7 @@ export const RegisterUserPage = () => {
         passwordConfirm !== null
       ) {
         const resRegistration = await axios.post(
-          "http://95.163.228.30:80/api/auth/reg/",
+          "https://etalon-socks.ru/nest/api/auth/reg/",
           {
             email: email,
             login: login,
@@ -35,7 +35,7 @@ export const RegisterUserPage = () => {
         );
 
         const resLogin = await axios.post(
-          "http://95.163.228.30:80/api/auth/login",
+          "https://etalon-socks.ru/nest/api/auth/login",
           {
             email: email,
             login: login,
@@ -52,7 +52,7 @@ export const RegisterUserPage = () => {
         // localStorage.setItem("userToken", resLogin.data.acessToken);
         // localStorage.setItem("userEmail", email);
         // localStorage.setItem("userLogin", login);
-        return navigate("/product");
+        return navigate("/");
       } else {
         alert("Заполните все поля!");
       }

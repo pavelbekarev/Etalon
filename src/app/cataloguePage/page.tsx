@@ -1,5 +1,6 @@
 "use client";
 
+import "../page.scss";
 import { SocksBanner } from "@/app/imgs/imgIndex/imgIndex";
 import React from "react";
 import NewProductsBlock from "../Blocks/newProductsBlock/NewProductsBlock";

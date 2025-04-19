@@ -7,12 +7,68 @@ import Image from "next/image";
 import { cardsInfo } from "./constants";
 import { CardModel } from "@/app/components/Card/model/index";
 import axios from "axios";
-import { IProduct } from "@/app/types/interface";
+import { IProduct ,ICategory} from "@/app/types/interface";
+import { ColorsComponent } from "./components/ColorsComponent";
+import { TypesComponent } from "./components/TypesComponent";
+import { SizesComponent } from "./components/SizesComponent";
 
+export interface ICheckbox {
+    name:string;
+    isChecked:boolean;
+    article:string;
+    id:number;
+};
+export interface ISizeCheckbox {
+    name:string;
+    min:number;
+    max:number;
+    isChecked:boolean;
+    article:string;
+    id:number;
+};
 const NewProductsBlock = () => {
-  const [mode, setMode] = useState<string>("all");
+  const [mode, setMode] = useState<string>("все");
   const [filter, setFilter] = useState<string>("");
   const [showMore, setShowMore] = useState<boolean>(false);
+
+
+  const [types,setTypeProduct]=useState<Array<ICheckbox>>([])
+
+  const [colors,setColorsProduct]=useState<Array<ICheckbox>>([])
+  const [sizes,setSizesProduct]=useState<Array<ISizeCheckbox>>([])
+
+  const setTypeTypes=(type:ICheckbox,id:number)=>{
+    let localType=types
+    localType[id]=type
+    setTypeProduct(localType)
+    console.log(localType)
+  }
+  const setColorTypes=(color:ICheckbox,id:number)=>{
+
+    let localColors=colors
+    localColors[id]=color
+    setColorsProduct(localColors)
+    console.log(color)
+    console.log(localColors)
+  }
+
+  const setSizeTypes=(size:ISizeCheckbox,id:number)=>{
+
+    let localsizes=sizes
+    localsizes[id]=size
+    setSizesProduct(localsizes)
+    console.log(size)
+    console.log(localsizes)
+  }
+
+
+  // const [size,setSizeProduct]=useState<string>("all")
+  // const [maxsize,setMaxSizeProduct]=useState<number>(0)
+  // const [minsize,setMinSizeProduct]=useState<number>(0)
+
+
+  const [products, setProducts] = useState<IProduct[]>([])
+  const [FilteredProducts, setFilteredProducts] = useState<IProduct[]>([])
 
   const [filtersOpen, setIsFiltersOpen] = useState(false);
 
@@ -31,9 +87,10 @@ const NewProductsBlock = () => {
   const ChooseType = () => {
     setFilter("type");
   };
-  const [products, setProducts] = useState<IProduct[]>([])
-    const getProducts = async () => {
-      const data: IProduct[] = await axios.get("http://95.163.228.30:80/api/product/products/", {
+  //http://95.163.228.30/api/product/products/
+    
+  const getProducts = async () => {
+      const data: IProduct[] = await axios.get("https://etalon-socks.ru/nest/api/product/products/", {
         headers: {
           Authorization: localStorage.getItem('userToken') || "",
           email: localStorage.getItem('userEmail') || "",
@@ -42,12 +99,79 @@ const NewProductsBlock = () => {
       }).then(res => res.data)
       console.log(data)
       setProducts(data)
+      setFilteredProducts(data)
     }
-    React.useEffect(() => {
+  React.useEffect(() => {
+    ResetFilters()
+    getProducts()
+  }, []);
+  // let FilteredProducts = products.filter(
+  //   ({ name, ISBN, autor }) =>
+  //     name.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
+  //     autor.name_autor.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
+  //     ISBN.toLowerCase().indexOf(text.toLowerCase()) > -1
+  // );
 
-      getProducts()
-    }, []);
 
+
+
+  const ResetFilters=()=>{
+    setTypeProduct([
+      {name:"Носки",isChecked:false,article:"socks",id:0},
+      {name:"Гольфы",isChecked:false,article:"golfs",id:1},
+      {name:"Чулки",isChecked:false,article:"chulki",id:2},
+    ])
+    setColorsProduct([
+      {name:"Черный",isChecked:false,article:"black",id:0},
+      {name:"Белый",isChecked:false,article:"white",id:1},
+      {name:"Серый",isChecked:false,article:"grey",id:2},
+      {name:"Синий",isChecked:false,article:"blue",id:3},
+      {name:"Зеленый",isChecked:false,article:"green",id:4},
+      {name:"Яркий",isChecked:false,article:"yarkiy",id:5},
+      {name:"С узором",isChecked:false,article:"symbols",id:6},
+    ])
+    setSizesProduct([
+      {name:"35-40",isChecked:false,article:"35-40",id:0,min:35,max:40},
+      {name:"41-43",isChecked:false,article:"41-43",id:1,min:41,max:43},
+      {name:"44-46",isChecked:false,article:"44-46",id:2,min:44,max:46},
+      {name:"46-48",isChecked:false,article:"46-48",id:3,min:46,max:48},
+    ])
+    if (products.length>0) {
+      
+    setFilteredProducts(products)
+    }
+  }
+  const SetFilterProduct=()=>{
+    let FPr = products
+      FPr = FPr.filter((product) =>{
+
+        return types.find(el=>el.name==product.typesocks.name)?.isChecked
+      })
+    
+      FPr = FPr.filter((product) =>{
+
+        return colors.find(el=>el.name==product.colorsocks.name)?.isChecked
+
+      })
+      FPr = FPr.filter((product) =>{
+
+        return sizes.find(el=>
+          el.min<product.min&&
+          el.max>product.max)
+        ?.isChecked
+
+      })
+    
+    console.log(FPr)
+    setFilteredProducts(FPr)
+   // return FPr
+  }
+  let FilteredProductsFinal = FilteredProducts
+  
+  if (mode != "все") {
+    console.log(mode)
+    FilteredProductsFinal = FilteredProductsFinal.filter((product) => product.category.name==mode)
+  }
   return (
     <div className="NewProductsBlock" id="NewProductsBlock">
       <div className="NewProductsBlock_header">
@@ -73,7 +197,7 @@ const NewProductsBlock = () => {
               <div className="NewProductsBlock_header_left_filters_filters_container">
                 <div className="NewProductsBlock_header_left_filters_filters_top">
                   Фильтры
-                  <p className="NewProductsBlock_header_left_filters_filters_top_additional">
+                  <p className="NewProductsBlock_header_left_filters_filters_top_additional" onClick={ResetFilters}>
                     Сбросить все
                   </p>
                 </div>
@@ -110,6 +234,7 @@ const NewProductsBlock = () => {
                 filtersOpen && filter === "type" ? "" : "off"
               }`}
             >
+              
               <div className="NewProductsBlock_header_left_filters_filters_additional_type_container">
                 <div className="NewProductsBlock_header_left_filters_filters_additional_type_top">
                   <div className="NewProductsBlock_header_left_filters_filters_additional_type_top_left">
@@ -120,29 +245,14 @@ const NewProductsBlock = () => {
                     />
                     Тип товара
                   </div>
-                  <p className="NewProductsBlock_header_left_filters_filters_additional_type_top_additional">
+                  <p className="NewProductsBlock_header_left_filters_filters_additional_type_top_additional" onClick={ResetFilters}>
                     Сбросить все
                   </p>
                 </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_type_el">
-                  <label form="socks">Носки</label>
-                  <input type="checkbox" id="socks" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_type_el">
-                  <label form="golfs">Гольфы</label>
-                  <input type="checkbox" id="golfs" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_type_el">
-                  <label form="thigs">Чулки</label>
-                  <input type="checkbox" id="thighs" />
-                </div>
-
+                {types.map((item)=>(<TypesComponent SetTypesFunc={setTypeTypes} key={item.id} index={item.id} type={item}/>))}
                 <div className="NewProductsBlock_header_left_filters_filters_additional_type_btn">
-                  <button>применить</button>
-                </div>
+                  <button onClick={()=>{SetFilterProduct()}}>применить</button>
+                </div> *
               </div>
             </div>
 
@@ -161,33 +271,15 @@ const NewProductsBlock = () => {
                     ></Image>
                     Размер
                   </div>
-                  <p className="NewProductsBlock_header_left_filters_filters_additional_size_top_additional">
+                  <p className="NewProductsBlock_header_left_filters_filters_additional_size_top_additional" onClick={ResetFilters}>
                     Сбросить все
                   </p>
                 </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_size_el">
-                  <label form="35-40">35-40</label>
-                  <input type="checkbox" id="35-40" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_size_el">
-                  <label form="41-43">41-43</label>
-                  <input type="checkbox" id="41-43" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_size_el">
-                  <label form="44-46">44-46</label>
-                  <input type="checkbox" id="45-46" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_size_el">
-                  <label form="46-48">41-43</label>
-                  <input type="checkbox" id="46-48" />
-                </div>
-
+                {sizes.map((item)=>(<SizesComponent SetSizesFunc={setSizeTypes} key={item.id} index={item.id} type={item}/>))}
+                
+                
                 <div className="NewProductsBlock_header_left_filters_filters_additional_size_btn">
-                  <button>применить</button>
+                  <button onClick={()=>{SetFilterProduct()}}>применить</button>
                 </div>
               </div>
             </div>
@@ -207,49 +299,16 @@ const NewProductsBlock = () => {
                     ></Image>
                     Цвет
                   </div>
-                  <p className="NewProductsBlock_header_left_filters_filters_additional_color_top_additional">
+                  <p className="NewProductsBlock_header_left_filters_filters_additional_color_top_additional" onClick={ResetFilters}>
                     Сбросить все
                   </p>
                 </div>
 
-                <div className="NewProductsBlock_header_left_filters_filters_additional_color_el">
-                  <label form="black">Черный</label>
-                  <input type="checkbox" id="black" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_color_el">
-                  <label form="white">Белый</label>
-                  <input type="checkbox" id="white" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_color_el">
-                  <label form="grey">Серый</label>
-                  <input type="checkbox" id="grey" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_color_el">
-                  <label form="blue">Синий</label>
-                  <input type="checkbox" id="blue" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_color_el">
-                  <label form="green">Зеленый</label>
-                  <input type="checkbox" id="green" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_color_el">
-                  <label form="yarkiy">Яркий</label>
-                  <input type="checkbox" id="yarkiy" />
-                </div>
-
-                <div className="NewProductsBlock_header_left_filters_filters_additional_color_el">
-                  <label form="symbols">С узором</label>
-                  <input type="checkbox" id="symbols" />
-                </div>
+                {colors.map((item)=>(<ColorsComponent SetColorsFunc={setColorTypes} key={item.id} index={item.id} color={item}/>))}
 
                 <button
                   className="NewProductsBlock_header_left_filters_filters_additional_color_btn"
-                  onClick={() => console.log(filtersOpen)}
+                  onClick={()=>{SetFilterProduct()}}
                 >
                   применить
                 </button>
@@ -260,33 +319,45 @@ const NewProductsBlock = () => {
         <div className="NewProductsBlock_header_right">
           <div
             className={`NewProductsBlock_header_right_filterBtn ${
-              mode === "all" ? "active" : ""
+              mode === "все" ? "active" : ""
             }`}
-            onClick={() => setMode("all")}
+            onClick={() => {
+              setMode("все")
+            }
+            }
           >
             все
           </div>
           <div
             className={`NewProductsBlock_header_right_filterBtn ${
-              mode === "male" ? "active" : ""
+              mode === "женские" ? "active" : ""
             }`}
-            onClick={() => setMode("male")}
+            onClick={() => {
+              setMode("женские")
+            }}
           >
             женские
           </div>
           <div
             className={`NewProductsBlock_header_right_filterBtn ${
-              mode === "female" ? "active" : ""
+              mode === "мужские" ? "active" : ""
             }`}
-            onClick={() => setMode("female")}
+            onClick={() => {
+              setMode("мужские")
+
+            }}
           >
             мужские
           </div>
           <div
             className={`NewProductsBlock_header_right_filterBtn ${
-              mode === "child" ? "active" : ""
+              mode === "детские" ? "active" : ""
             }`}
-            onClick={() => setMode("child")}
+            onClick={() =>{
+              
+              setMode("детские")
+            
+            }}
           >
             детские
           </div>
@@ -301,7 +372,7 @@ const NewProductsBlock = () => {
                 filtersOpen ? "background_active" : ""
               }`}
             ></div>
-            {products.map(
+            {FilteredProductsFinal.map(
               (item, key) =>
                 key <= 7 && (
                   <Card
@@ -322,7 +393,7 @@ const NewProductsBlock = () => {
                 filtersOpen ? "background_active" : ""
               }`}
             ></div>
-            {products.map((item, key) => {
+            {FilteredProductsFinal.map((item, key) => {
               return  (
                 <Card
                   key={key}

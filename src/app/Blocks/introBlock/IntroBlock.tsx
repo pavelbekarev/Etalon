@@ -83,7 +83,9 @@ export const IntroBlock = ({
         <div className="container">
         <div className="HeaderBlock_main">
           <div className="HeaderBlock_main_txt">
-            {txtChild}
+            <h1>
+              {txtChild}
+            </h1>
             <div className="HeaderBlock_main_txt_additional">
               {txtChildAdditional}
             </div>
